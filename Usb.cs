@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+
 
 namespace CSharpSts
 {
-    public class Usb : IEquatable<Usb>
+    public class Usb 
     {
 
         public int RealCapacityGo {get; set;}
@@ -14,11 +14,6 @@ namespace CSharpSts
         public override string ToString()
         {
             return "Go: " + RealCapacityGo + "   Byte: " + RealCapacityBytes;
-        }
-
-        public bool Equals([AllowNull] Usb other)
-        {
-            throw new NotImplementedException();
         }
 
         public void Capacity()
