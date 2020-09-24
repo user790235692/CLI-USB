@@ -7,10 +7,21 @@ namespace CSharpSts
     {
         public static void Main(string[] args)
         {
-            string valueInput = Console.ReadLine();
-            FetchUSB(Int32.Parse(valueInput));
-        }
+            Console.WriteLine("Veuillez entrer une clé usb !");
 
+            string valueInput = Console.ReadLine();
+
+            try
+            {
+                FetchUSB(Int32.Parse(valueInput));
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("Rentrez seulement des chiffres !");
+            }
+
+        }
         public static List<Usb> CreateUSB() {
             List<Usb> usb = new List<Usb>();
             
@@ -25,18 +36,31 @@ namespace CSharpSts
 
             return usb;
         }
-
-
         public static void FetchUSB(int RealCapacityGo)
         {
             List<Usb> usb_keys = CreateUSB();
 
+            bool IsGood = false;
+
+            foreach(var usb in usb_keys)
+            {   
+                
+                if (usb.RealCapacityGo == RealCapacityGo)
+                {
+                    IsGood = true;
+
+                    Console.WriteLine($"USB trouvé : {usb}");
+                }
+            }
+
             foreach(var usb in usb_keys)
             {
-                if (usb.RealCapacityGo == RealCapacityGo)
-                    Console.WriteLine($"USB trouvé : {usb}");
-            }   
+                if (!IsGood)
+                {
+                Console.WriteLine($"Usb non trouvé, veuillez entrer une capcité valide {usb}");
+                }   
+            }         
         }
     }
-
 }
+
