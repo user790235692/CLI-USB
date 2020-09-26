@@ -23,6 +23,10 @@ namespace CSharpSts
 
             IsPlugIn();
 
+            SaveFile saveFile = new SaveFile();
+
+            saveFile.Main();
+
             
 
         }
@@ -63,7 +67,8 @@ namespace CSharpSts
                 {
                 Console.WriteLine($"Usb non trouvé, veuillez entrer une capcité valide {usb}");
                 }   
-            }         
+            } 
+                   
         }
 
         public static void IsPlugIn()
@@ -71,7 +76,7 @@ namespace CSharpSts
             IsPlug isPlug = new IsPlug();
 
             var result = isPlug.getBoolInputValue(Console.ReadLine());
-            
+
             Console.WriteLine(result);
         }
     }
