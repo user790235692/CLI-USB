@@ -21,6 +21,10 @@ namespace CSharpSts
                 Console.WriteLine("Rentrez seulement des chiffres !");
             }
 
+            IsPlugIn();
+
+            
+
         }
         public static List<Usb> CreateUSB() {
             List<Usb> usb = new List<Usb>();
@@ -60,6 +64,15 @@ namespace CSharpSts
                 Console.WriteLine($"Usb non trouvé, veuillez entrer une capcité valide {usb}");
                 }   
             }         
+        }
+
+        public static void IsPlugIn()
+        {
+            IsPlug isPlug = new IsPlug();
+
+            var result = isPlug.getBoolInputValue(Console.ReadLine());
+            
+            Console.WriteLine(result);
         }
     }
 }
