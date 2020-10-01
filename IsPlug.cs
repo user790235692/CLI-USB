@@ -1,3 +1,4 @@
+using System;
 
 namespace CSharpSts
 {
@@ -10,14 +11,17 @@ namespace CSharpSts
             {
             return true;
             }
+
             else if (intputType.ToLower() == "no")
             {
+            
+
             return  false;
             }
 
             else
             {
-            return false;
+                return false;
             }
 
         }

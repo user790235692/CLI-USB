@@ -7,7 +7,9 @@ namespace CSharpSts
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Veuillez entrer une clé usb !");
+            IsPlugIn();
+
+            Console.WriteLine("Veuillez indiqué l'espace de votre clé usb !");
 
             string valueInputGo = Console.ReadLine();
 
@@ -21,8 +23,6 @@ namespace CSharpSts
                 Console.WriteLine("Rentrez seulement des chiffres !");
             }
 
-            IsPlugIn();
-
             Console.WriteLine("Dans quel formatage voulez-vous votre usb ?");
 
             string valueInputSystem = Console.ReadLine().ToUpper();
@@ -35,13 +35,7 @@ namespace CSharpSts
             catch(FormatException)
             {
                 Console.WriteLine("Rentrz seulement des caractère !");
-            }
-
-            SaveFile saveFile = new SaveFile();
-
-            saveFile.Main();
-
-            
+            }       
 
         }
         public static List<Usb> CreateUSB() {
@@ -73,7 +67,9 @@ namespace CSharpSts
                     IsGood = true;
 
                     Console.WriteLine($"USB trouvé : {usbCapacity}");
+
                 }
+                
             }
 
             foreach(var usbCapacity in usb_keys)
@@ -81,8 +77,10 @@ namespace CSharpSts
                 if (!IsGood)
                 {
                 Console.WriteLine($"Usb non trouvé, veuillez entrer une capcité valide {usbCapacity}");
+                
                 }   
             } 
+
                    
         }
 
@@ -124,9 +122,7 @@ namespace CSharpSts
                 }
             }
 
-
         }
-
         public static void IsPlugIn()
         {
             IsPlug isPlug = new IsPlug();
