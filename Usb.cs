@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 
 namespace CSharpSts
 {
@@ -19,6 +16,7 @@ namespace CSharpSts
         {
             return $"Go: {RealCapacityGo}  Byte: {RealCapacityBytes}";
         }
+
     }
 
 }
