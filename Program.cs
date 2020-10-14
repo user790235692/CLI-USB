@@ -7,36 +7,61 @@ namespace CSharpSts
     {
         public static void Main(string[] args)
         {
-            IsPlugIn();
+            //IsPlugIn();
 
-            Console.WriteLine("Veuillez indiqué l'espace de votre clé usb !");
+            Usb usb = null;
 
-            string valueInputGo = Console.ReadLine();
+            List<Usb> usb_keys = CreateUSB();
 
-            try
-            {
-                FetchUSB(Int32.Parse(valueInputGo));
+            while (usb == null) {
+                Console.WriteLine("Veuillez indiqué l'espace de votre clé usb !");
+
+                try {
+                    int valueInputGo = Int32.Parse(Console.ReadLine());
+                    usb = FetchUSB(usb_keys, valueInputGo);
+
+                    if (usb == null)
+                        Console.WriteLine($"Pas d'USB trouvée, veuillez insérer une de ces valeurs : \n {String.Join("\n", usb_keys)}");
+                         
+                    else
+                        Console.WriteLine($"USB trouvée : {usb}");
+                        
+                }
+
+                catch(FormatException) {
+                    Console.WriteLine("Rentrez seulement des chiffres !");
+                }
+                
             }
 
-            catch(FormatException)
-            {
-                Console.WriteLine("Rentrez seulement des chiffres !");
+            UsbFileSystem usbFileSystem = null;
+
+            List<UsbFileSystem> usb_format = InitializeUsb();
+
+            while(usbFileSystem == null) {
+
+                Console.WriteLine("Dans quel format vouslez-vous la formater ?");
+
+                try{
+                    string valueInputSystem = Console.ReadLine().ToUpper();
+
+                    usbFileSystem = FormatUsb(usb_format, valueInputSystem);
+
+                    if (usbFileSystem == null)
+                    {
+                        Console.WriteLine($"Pas de format valide voici les disponibles : \n {usb_format}");
+                    }
+
+                    else
+                        Console.WriteLine($"La clé usb est formaté en : {usb_format}");
+                }
+                catch(FormatException){
+                    Console.WriteLine("Rentrez seulement des caratères !");
+
+                }
+
             }
-
-            Console.WriteLine("Dans quel formatage voulez-vous votre usb ?");
-
-            string valueInputSystem = Console.ReadLine().ToUpper();
-
-            try
-            {
-                FormatUsb(valueInputSystem);
-            }
-
-            catch(FormatException)
-            {
-                Console.WriteLine("Rentrz seulement des caractère !");
-            }       
-
+              
         }
         public static List<Usb> CreateUSB() {
             List<Usb> usbCapacity = new List<Usb>();
@@ -53,35 +78,15 @@ namespace CSharpSts
             return usbCapacity;
 
         }
-        public static void FetchUSB(int RealCapacityGo)
+        public static Usb FetchUSB(List<Usb> usb_keys, int RealCapacityGo)
         {
-            List<Usb> usb_keys = CreateUSB();
-
-            bool IsGood = false;
-
-            foreach(var usbCapacity in usb_keys)
-            {   
-                
-                if (usbCapacity.RealCapacityGo == RealCapacityGo)
-                {
-                    IsGood = true;
-
-                    Console.WriteLine($"USB trouvé : {usbCapacity}");
-
-                }
-                
-            }
-
-            foreach(var usbCapacity in usb_keys)
-            {
-                if (!IsGood)
-                {
-                Console.WriteLine($"Usb non trouvé, veuillez entrer une capcité valide {usbCapacity}");
-                
-                }   
-            } 
-
-                   
+            List<Usb> result = usb_keys.FindAll(usb => usb.RealCapacityGo == RealCapacityGo);
+            
+            if (result.Count == 1)
+                return result[0];
+            
+            else
+                return null;
         }
 
         public static List<UsbFileSystem> InitializeUsb()
@@ -95,32 +100,17 @@ namespace CSharpSts
             return usbFileSystem;
         }
 
-        public static void FormatUsb(string FileSystem)
+        public static UsbFileSystem FormatUsb(List<UsbFileSystem> usb_format, string FileSytem)
         {
-            List<UsbFileSystem> usb_files = InitializeUsb();
+            List<UsbFileSystem> result =  usb_format.FindAll(usbFileSystem => usbFileSystem.FileSystem == FileSytem);
 
-            bool isFormated = false;
-
-            foreach(var UsbFileSystem in usb_files)
+            if(result.Count == 1)
             {
-                if (UsbFileSystem.FileSystem == FileSystem)
-                    {
-
-                    isFormated = true;
-
-                    Console.WriteLine($"Votre usb est formaté au sytème: {UsbFileSystem}");
-
-                    var result = Console.ReadLine();
-                    } 
+                return result[0];
             }
 
-            foreach(var UsbFileSystem in usb_files)
-            {
-                if(!isFormated)
-                {
-                    Console.WriteLine($"Voci les formatages disponibles: {UsbFileSystem}");
-                }
-            }
+            else
+                return null;
 
         }
         public static void IsPlugIn()

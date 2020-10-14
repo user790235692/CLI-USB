@@ -14,14 +14,14 @@ namespace CSharpSts
 
             else if (intputType.ToLower() == "no")
             {
-            
-
+            Environment.Exit(1);
             return  false;
             }
 
             else
             {
-                return false;
+            Environment.Exit(1);
+            return false;
             }
 
         }
