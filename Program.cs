@@ -49,18 +49,19 @@ namespace CSharpSts
 
                     if (usbFileSystem == null)
                     {
-                        Console.WriteLine($"Pas de format valide voici les disponibles : \n {usb_format}");
+                        Console.WriteLine($"Pas de format valide voici les disponibles :\n {String.Join("\n", usb_format)}");
                     }
 
                     else
-                        Console.WriteLine($"La clé usb est formaté en : {usb_format}");
+                        Console.WriteLine($"La clé usb est formaté en : {usbFileSystem}");
                 }
                 catch(FormatException){
                     Console.WriteLine("Rentrez seulement des caratères !");
 
                 }
-
             }
+
+            
               
         }
         public static List<Usb> CreateUSB() {
@@ -105,10 +106,8 @@ namespace CSharpSts
             List<UsbFileSystem> result =  usb_format.FindAll(usbFileSystem => usbFileSystem.FileSystem == FileSytem);
 
             if(result.Count == 1)
-            {
                 return result[0];
-            }
-
+            
             else
                 return null;
 
