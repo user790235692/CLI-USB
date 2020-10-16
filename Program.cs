@@ -7,14 +7,14 @@ namespace CSharpSts
     {
         public static void Main(string[] args)
         {
-            //IsPlugIn();
+            IsPlugIn();
 
             Usb usb = null;
 
             List<Usb> usb_keys = CreateUSB();
 
             while (usb == null) {
-                Console.WriteLine("Veuillez indiqué l'espace de votre clé usb !");
+                Console.WriteLine("Veuillez indiquer l'espace de votre clé usb !");
 
                 try {
                     int valueInputGo = Int32.Parse(Console.ReadLine());
@@ -60,9 +60,6 @@ namespace CSharpSts
 
                 }
             }
-
-            
-              
         }
         public static List<Usb> CreateUSB() {
             List<Usb> usbCapacity = new List<Usb>();
