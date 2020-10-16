@@ -6,6 +6,9 @@ namespace CSharpSts
 {
     public class SaveFile
     {
-        
+        public SaveFile()
+        {
+            
+        }
     }
 }
